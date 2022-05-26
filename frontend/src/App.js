@@ -22,6 +22,7 @@ const App = () => {
   }
 
   const editMovie = (event) => {
+    console.log(event)
     setActive('edit')
   }
 
@@ -47,7 +48,7 @@ const App = () => {
 
   const handleNewWatchedChange = (event) => {
     // console.log(event.target.checked);
-    setGenre(event.target.checked);
+    setWatched(event.target.checked);
   }
 
   const handleNewmovieFormSubmit = (event) => {
@@ -94,7 +95,7 @@ const App = () => {
               release: release,
               image: image,
               genre: genre,
-              watched: watched
+              watched: !movieData.watched
             }
         )
         .then(()=>{
@@ -151,18 +152,22 @@ const App = () => {
         </header>
           <div className='container'>
           <div className="row row-cols-1 row-cols-md-3 g-4">
-            <div className="card" key={movies._id}>
-              <div className="card-body">
-                <form onSubmit={(event) => { handleUpdateFormSubmit(movies) }}>
-                  <h5 className="card-title"> Name: <input type="text" className="form-control" onChange={handleNewNameChange} placeholder={movies.name} /></h5> <br />
-                  <p className="card-body">Image: <input type="text" className="form-control" onChange={handleNewImageChange} placeholder={movies.image} /></p> <br />
-                  <p className="card-body">Release: <input type="text" className="form-control" onChange={handleNewReleaseChange} placeholder={movies.release} /> </p> <br />
-                  <p className="card-body">Genre: <input type="text" className="form-control" onChange={handleNewGenreChange} placeholder={movies.genre} /> </p> <br />
-                  Watched: <input type="checkbox" onChange={handleNewWatchedChange} /><br />
-                  <input type="submit" value="SUBMIT" />
-                </form>
-              </div>
-            </div>
+            {
+              movies.map((movies) => {
+                return <div className="card" key={movies._id}>
+                  <div className="card-body">
+                    <form onSubmit={(event) => { handleUpdateFormSubmit(movies) }}>
+                      <h5 className="card-title"> Name: <input type="text" className="form-control" onChange={handleNewNameChange} placeholder={movies.name} /></h5> <br />
+                      <p className="card-body">Image: <input type="text" className="form-control" onChange={handleNewImageChange} placeholder={movies.image} /></p> <br />
+                      <p className="card-body">Release: <input type="text" className="form-control" onChange={handleNewReleaseChange} placeholder={movies.release} /> </p> <br />
+                      <p className="card-body">Genre: <input type="text" className="form-control" onChange={handleNewGenreChange} placeholder={movies.genre} /> </p> <br />
+                      Watched: <input type="checkbox" onChange={handleNewWatchedChange} /><br />
+                      <input type="submit" value="SUBMIT" />
+                    </form>
+                  </div>
+                </div>
+              })
+            }
           </div>
           </div>
       </>
