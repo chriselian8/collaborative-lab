@@ -121,6 +121,7 @@ const App = () => {
           <h1> Index </h1>
           <button onClick={getHome}>Home</button>
           <button onClick={newmovie}>Add a movie!</button>
+          <button onClick={editMovie}>Edit Movies</button>
         </header>
         <div className='container'>
           <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -134,7 +135,6 @@ const App = () => {
                  <h3 className="card-body">{movies.genre}</h3>
                  {movies.watched ? <h3 className="card-body">You have watched this movie</h3> : <h3 className="card-body">You have not watched this yet</h3>}
                </div>
-              <button onClick={editMovie}>Edit Movie</button>
               <button onClick={(event) => {handleDelete(movies)}}>Remove Movie</button>
             </div>
             })
